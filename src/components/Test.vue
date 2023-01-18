@@ -46,6 +46,7 @@ export default {
       this.$store.commit('setFirst')
       this.resetTimer()
     },
+    ///
     check () {
       if (this.currentWord.text === this.input) {
         this.$store.commit('setResult', 'success')
