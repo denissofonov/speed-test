@@ -1,13 +1,16 @@
 <template>
-    <Main class='main'/>
+  <div>
+    <Header />
+    <router-view class='router'></router-view>
+  </div>
 </template>
 
 <script>
-import Main from '@/components/Main.vue'
+import Header from '@/components/Header.vue'
 
 export default {
   name: 'App',
-  components: { Main }
+  components: { Header }
 }
 </script>
 
@@ -18,11 +21,4 @@ export default {
   src: url(@/assets/fonts/ChakraPetch-Light.ttf)
 *
   font-family: Chakra Petch
-#app
-  background-color: #FFFAFA
-.main
-    margin: 0 auto
-    width: 100%
-    height: 100vh
-    background-color: #EAE6CA
 </style>

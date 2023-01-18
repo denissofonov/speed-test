@@ -1,7 +1,7 @@
 <template>
-    <div class='main'>
-        <h1 class='main__title'>Typing check</h1>
-        <div class='main__text'>
+    <div class='test'>
+        <h1 class='test__title'>Typing check</h1>
+        <div class='test__text'>
           <div>
             <div v-for='(word , i) in words' :key='i' :class='{ current: isCurrent(word.isCurrent), error: word.result=== "error", success: word.result==="success" }'>
                 {{word.text}}
@@ -13,14 +13,14 @@
             </div>
           </div>
         </div>
-        <div class='main__input'>
+        <div class='test__input'>
             <input v-model.trim='input' type='text' @keydown.space='check' :disabled='isFinish'>
         </div>
         <div> Timer: {{ time }}</div>
-        <div class='main__button'>
+        <div class='test__button'>
             <button @click='restart'>Restart</button>
         </div>
-        <div v-if='time === 0' class='main__result'>
+        <div v-if='time === 0' class='test__result'>
           <div>You are typing {{ result }} words per minute.</div>
           <div>Mistakes: {{ errorWords }}</div>
           <div>Right: {{ successWords }}</div>
@@ -30,21 +30,21 @@
 
 <script>
 export default {
-  name: 'Main',
+  name: 'Test',
   data () {
     return {
       input: '',
-      time: 60,
+      time: 10,
       start: false,
       point: 0
     }
   },
   methods: {
     restart () {
+      this.input = ''
       this.$store.commit('restart')
       this.$store.commit('setFirst')
       this.resetTimer()
-      this.input = ''
     },
     check () {
       if (this.currentWord.text === this.input) {
@@ -67,9 +67,9 @@ export default {
       }, 1000)
     },
     resetTimer () {
-      this.start = false
-      this.time = 60
       clearInterval(this.interval)
+      this.time = 10
+      this.start = false
     }
   },
   computed: {
@@ -89,7 +89,6 @@ export default {
       return false
     },
     isFinish () {
-      // return false
       if (this.time === 0) {
         return true
       } else {
@@ -111,13 +110,14 @@ export default {
   },
   watch: {
     input () {
-      if (this.start === false) {
+      if (this.start === false && this.input !== '') {
         this.startTimer()
       }
     },
     isCompleted () {
       if (this.words.every(i => i.result)) {
         this.point += 10
+        debugger
       }
     }
   },
@@ -129,15 +129,15 @@ export default {
 </script>
 
 <style lang='sass'>
-.main
-    width: 1000px
-    height: 600px
-    padding: 50px 0 0
+.test
+    width: 100%
+    height: calc(100vh - 80px)
     display: flex
     flex-direction: column
     justify-content: center
     align-items: center
     gap: 20px
+    background-color: #EAE6CA
     color: #140F0B
     &__title
       font-size: 26px
@@ -164,6 +164,7 @@ export default {
     &__result
       display: flex
       flex-direction: column
+      font-size: 18px
 .current
     background-color: #bdbebd
 .error

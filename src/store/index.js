@@ -18,6 +18,7 @@ export default createStore({
         i.isCurrent = false
       })
       state.words[0].isCurrent = true
+      debugger
     },
     setCurrent (state, currentWord) {
       state.words.forEach((i, index) => {
