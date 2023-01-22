@@ -3,7 +3,7 @@
         <h1 class='test__title'>Typing check</h1>
         <div class='test__text'>
           <div>
-            <div v-for='(word , i) in words' :key='i' :class='{ current: isCurrent(word.isCurrent), error: word.result=== "error", success: word.result==="success" }'>
+            <div v-for='(word , i) in words' :key='i' :class='{ current: isCurrent(word.isCurrent), error: word.result=== "error", success: word.result==="success" }' class='test__words'>
                 {{word.text}}
             </div>
           </div>
@@ -16,7 +16,7 @@
         <div class='test__input'>
             <input v-model.trim='input' type='text' @keydown.space='check' :disabled='isFinish'>
         </div>
-        <div> Timer: {{ time }}</div>
+        <div>Timer: {{ time }}</div>
         <div class='test__button'>
             <button @click='restart'>Restart</button>
         </div>
@@ -34,7 +34,7 @@ export default {
   data () {
     return {
       input: '',
-      time: 10,
+      time: 60,
       start: false,
       point: 0
     }
@@ -46,7 +46,6 @@ export default {
       this.$store.commit('setFirst')
       this.resetTimer()
     },
-    ///
     check () {
       if (this.currentWord.text === this.input) {
         this.$store.commit('setResult', 'success')
@@ -69,7 +68,7 @@ export default {
     },
     resetTimer () {
       clearInterval(this.interval)
-      this.time = 10
+      this.time = 60
       this.start = false
     }
   },

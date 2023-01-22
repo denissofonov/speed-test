@@ -1,9 +1,8 @@
-<!-- eslint-disable no-tabs -->
 <template>
     <div class='header'>
       <nav class='header__nav'>
-        <router-link to='/roules' class='header__nav__link'>Roules</router-link>
-        <router-link to='/test' class='header__nav__link'>Test</router-link>
+        <router-link to='/roules' class='header__link'>Roules</router-link>
+        <router-link to='/test' class='header__link'>Test</router-link>
       </nav>
     </div>
 </template>
@@ -27,6 +26,6 @@ export default {
     gap: 20px
     color: #140F0B
     text-decoration: none
-    &__link:visited
-      color: #140F0B
+  &__link:visited
+    color: #140F0B
  </style>
